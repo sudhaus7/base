@@ -1,0 +1,28 @@
+{
+  "name": "SUDHAUS7/sudhaus7-base",
+  "description": "(Sudhaus7) Base Functions",
+  "version": "1.0.0",
+  "type": "typo3-cms-extension",
+  "license": "",
+  "authors": [
+    {
+      "name": "Frank Berger",
+      "role": "Developer"
+    },
+    {
+      "name": "Markus Hofmann",
+      "role": "Developer"
+    }
+  ],
+  "replace": {
+    "sudhaus7_base": "self.version"
+  },
+  "require": {
+    "typo3/cms-core": ">=6.2,<8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "SUDHAUS7\\Sudhaus7Base\\": "Classes/"
+    }
+  }
+}
