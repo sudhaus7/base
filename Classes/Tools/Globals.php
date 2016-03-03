@@ -9,6 +9,7 @@
 namespace SUDHAUS7\Sudhaus7Base\Tools;
 
 
+
 class Globals
 {
     /**
@@ -23,5 +24,11 @@ class Globals
      */
     public static function db() {
         return DB::get();
+    }
+    /**
+     * @return \TYPO3\CMS\Backend\FrontendBackendUserAuthentication
+     */
+    public static function beuser() {
+        return $GLOBALS['BE_USER'];
     }
 }
