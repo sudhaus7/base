@@ -18,6 +18,7 @@ class Asset {
      * @param array $list A list with filenames relative to Resources/Public of $ext
      * @param bool $footer
      * @param bool $return return the content instead of adding to TSFE
+     * @return mixed
      */
     public static function add($ext, array $list, $footer = false, $return=false) {
 
@@ -37,6 +38,7 @@ class Asset {
      * @param string $file A filename relative to Resources/Public of $ext or an URL
      * @param bool $footer
      * @param bool $return return the content instead of adding to TSFE
+     * @return mixed
      */
     public static function js($ext, $file, $footer = false, $return=false) {
 
@@ -63,7 +65,7 @@ class Asset {
      * @param string $file A filename relative to Resources/Public of $ext or an URL
      * @param bool $footer
      * @param bool $return return the content instead of adding to TSFE
-     * @return void
+     * @return mixed
      */
     public static function css($ext, $file,$footer = false, $return=false) {
         $content = '';
