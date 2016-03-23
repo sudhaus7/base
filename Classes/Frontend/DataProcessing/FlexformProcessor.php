@@ -30,8 +30,8 @@ class FlexformProcessor implements DataProcessorInterface
         array $processedData
     )
     {
-        if (isset($processedData['sudhaus7_flexform']) && !empty($processedData['sudhaus7_flexform']) && !is_array($processedData['sudhaus7_flexform'])) {
-            $processedData['sudhaus7_flexform'] = GeneralUtility::xml2array($processedData['sudhaus7_flexform']);
+        if (isset($processedData['data']['sudhaus7_flexform']) && !empty($processedData['data']['sudhaus7_flexform']) && !is_array($processedData['data']['sudhaus7_flexform'])) {
+            $processedData['data']['sudhaus7_flexform'] = GeneralUtility::xml2array($processedData['data']['sudhaus7_flexform']);
         }
         return $processedData;
     }
