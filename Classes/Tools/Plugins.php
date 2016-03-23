@@ -2,6 +2,25 @@
 namespace SUDHAUS7\Sudhaus7Base\Tools;
 
 class Plugins {
+
+    /**
+     * Adds an entry to the "ds" array of the tt_content field "sudhaus7_flexform".
+     * This is used by plugins to add a flexform XML reference / content for use when they are selected as plugin or content element.
+     *
+     * @param string $piKeyToMatch Plugin key as used in the list_type field. Use the asterisk * to match all list_type values.
+     * @param string $value Either a reference to a flex-form XML file (eg. "FILE:EXT:newloginbox/flexform_ds.xml") or the XML directly.
+     * @param string $CTypeToMatch Value of tt_content.CType (Content Type) to match. The default is "list" which corresponds to the "Insert Plugin" content element.  Use the asterisk * to match all CType values.
+     * @return void
+     * @see addPlugin()
+     */
+    public static function addPiFlexFormValue($piKeyToMatch, $value, $CTypeToMatch = 'list')
+    {
+        if (is_array($GLOBALS['TCA']['tt_content']['columns']) && is_array($GLOBALS['TCA']['tt_content']['columns']['sudhaus7_flexform']['config']['ds'])) {
+            $GLOBALS['TCA']['tt_content']['columns']['sudhaus7_flexform']['config']['ds'][$piKeyToMatch] = $value;
+        }
+    }
+
+
     public static function AddList($ext,$ns,$index) {
         $base = strtolower(str_replace('_','',$ext));
         $key = 'tx_'.$base.'_pi'.$index;
@@ -16,8 +35,8 @@ plugin.'.$key.' {
 tt_content.list.20.'.$ext.'_pi'.$index.' = < plugin.'.$key.'
 ','defaultContentRendering');
     }
-    public static function AddCtype() {
-
+    public static function AddCtype($ext,$ns,$element,$flexform = false) {
+       
     }
     
     public static function AddListTtcontent($ext,$i,$flex=false,$wizard=false,$config = array()) {
