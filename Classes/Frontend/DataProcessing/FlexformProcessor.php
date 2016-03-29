@@ -28,25 +28,29 @@ class FlexformProcessor implements DataProcessorInterface
         array $contentObjectConfiguration,
         array $processorConfiguration,
         array $processedData
-    )
-    {
+    ) {
         if (isset($processedData['data']['sudhaus7_flexform']) && !empty($processedData['data']['sudhaus7_flexform']) && !is_array($processedData['data']['sudhaus7_flexform'])) {
-            $processedData['data']['sudhaus7_flexform'] = GeneralUtility::xml2array($processedData['data']['sudhaus7_flexform']);
-            if (isset($processorConfiguration['flatten']) && $processorConfiguration['flatten']) {
-                $tmp = $processedData['data']['sudhaus7_flexform']['data'];
-                $data = [];
-                foreach ($tmp as $k=>$a) {
-                    foreach ($a as $kk => $aa) {
-                        //$data = array_merge($data,$aa);
-                        foreach ($aa as $name => $value) {
-                            $data[$name]=$value['vDEF'];
-                        }
-                    }
-                }
-                $processedData['data']['sudhaus7_flexform'] = $data;
-            }
+            $processedData['data']['sudhaus7_flexform'] = self::run($processedData['data']['sudhaus7_flexform'],isset($processorConfiguration['flatten']) && $processorConfiguration['flatten']);
         }
         return $processedData;
     }
 
+    public static function run($s,$flatten = false) {
+        //$data = array();
+        $data = GeneralUtility::xml2array($s);
+        if ($flatten) {
+            $tmp = $data;
+            $data = [];
+            foreach ($tmp as $k=>$a) {
+                foreach ($a as $kk => $aa) {
+                    //$data = array_merge($data,$aa);
+                    foreach ($aa as $name => $value) {
+                        $data[$name]=$value['vDEF'];
+                    }
+                }
+            }
+
+        }
+        return $data;
+    }
 }
