@@ -39,7 +39,7 @@ class FlexformProcessor implements DataProcessorInterface
         //$data = array();
         $data = GeneralUtility::xml2array($s);
         if ($flatten) {
-            $tmp = $data;
+            $tmp = $data['data'];
             $data = [];
             foreach ($tmp as $k=>$a) {
                 foreach ($a as $kk => $aa) {
