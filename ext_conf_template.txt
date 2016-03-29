@@ -1,0 +1,4 @@
+# cat=basic//01; type=string; label=Path to Phantomjs
+PHANTOMJS = /var/lib/phantomjs/current/bin/phantomjs
+
+
