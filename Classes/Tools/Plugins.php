@@ -58,7 +58,7 @@ tt_content.list.20.'.$ext.'_pi'.$index.' = < plugin.'.$key.'
                     $config['subtypes_addlist'].=',pi_flexform';
                 }
             }
-            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPIFlexFormValue($ext . '_' . $id, 'FILE:EXT:'.$ext.'/Configuration/Flexforms/' . ucfirst($id) . '.xml');
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($ext . '_' . $id, 'FILE:EXT:'.$ext.'/Configuration/Flexforms/' . ucfirst($id) . '.xml');
         }
         foreach ($config as $k=>$v) {
             $TCA['tt_content']['types']['list'][$k][$ext . '_' . $id] = $v;
