@@ -18,8 +18,6 @@ if (!defined('TYPO3_cliMode')) die('You cannot run this script directly!');
  */
 class Developer extends \TYPO3\CMS\Core\Controller\CommandLineController {
 
-    private $extbase = [];
-    private $declaredclasses = [];
     public $cli_help = array(
         'name' => 'Developer',
         'synopsis' => '###OPTIONS###',
@@ -29,7 +27,8 @@ class Developer extends \TYPO3\CMS\Core\Controller\CommandLineController {
         'license' => 'GNU GPL - free software!',
         'author' => 'Frank Berger'
     );
-
+    private $extbase = [];
+    private $declaredclasses = [];
 
     function __construct() {
 
@@ -61,7 +60,9 @@ class Developer extends \TYPO3\CMS\Core\Controller\CommandLineController {
 
     }
 
-    function main() {
+    function cli_main($argv)
+    {
+        $this->cli_setArguments($argv);
 
 
         $this->cli_validateArgs();
@@ -238,6 +239,17 @@ class '.$class.' extends \\TYPO3\\CMS\\Extbase\\DomainObject\\AbstractEntity {
 
     }
 
+    private function findClass($table)
+    {
+        $foundclass = false;
+        foreach ($this->extbase['config.']['tx_extbase.']['persistence.']['classes.'] as $class => $config) {
+            if ($config['mapping.']['tableName'] == $table) {
+                $foundclass = substr($class, 0, -1);
+            }
+        }
+        return $foundclass;
+    }
+
     private function makeGetterSetter($field,$type,$inject=false) {
         if ($inject) {
             $s = '
@@ -281,17 +293,4 @@ class '.$class.' extends \\TYPO3\\CMS\\Extbase\\DomainObject\\AbstractEntity {
 ';
         return $s;
     }
-
-    private function findClass($table) {
-        $foundclass = false;
-        foreach ($this->extbase['config.']['tx_extbase.']['persistence.']['classes.'] as $class=>$config) {
-            if ($config['mapping.']['tableName']==$table) {
-                $foundclass = substr($class,0,-1);
-            }
-        }
-        return $foundclass;
-    }
 }
-
-$SOBE = new Developer();
-$SOBE->main();
