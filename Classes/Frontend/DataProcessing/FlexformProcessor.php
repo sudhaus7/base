@@ -31,7 +31,11 @@ class FlexformProcessor implements DataProcessorInterface
     ) {
         if (isset($processedData['data']['sudhaus7_flexform']) && !empty($processedData['data']['sudhaus7_flexform']) && !is_array($processedData['data']['sudhaus7_flexform'])) {
             $processedData['data']['sudhaus7_flexform'] = self::run($processedData['data']['sudhaus7_flexform'],isset($processorConfiguration['flatten']) && $processorConfiguration['flatten']);
+            if (isset($processorConfiguration['merge']) && $processorConfiguration['merge'] && is_array($processedData['data']['sudhaus7_flexform'])) {
+                $processedData['data'] = array_merge($processedData['data'], $processedData['data']['sudhaus7_flexform']);
+            }
         }
+
         return $processedData;
     }
 

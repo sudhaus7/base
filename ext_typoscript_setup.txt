@@ -1,0 +1,23 @@
+config.tx_extbase {
+    persistence {
+        classes {
+            SUDHAUS7\Sudhaus7Base\Domain\Model\FileReference {
+                mapping {
+                    tableName = sys_file_reference
+                }
+            }
+        }
+    }
+}
+
+config.tx_sudhaus7base {
+    persistence {
+        classes {
+            SUDHAUS7\Sudhaus7Base\Domain\Model\FileReference {
+                mapping {
+                    tableName = sys_file_reference
+                }
+            }
+        }
+    }
+}
