@@ -3,6 +3,84 @@ namespace SUDHAUS7\Sudhaus7Base\Tools;
 
 class Plugins {
 
+    public static function AddList($ext, $ns, $index)
+    {
+        $base = strtolower(str_replace('_', '', $ext));
+        $key = 'tx_' . $base . '_pi' . $index;
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($key, 'setup', '
+### ADDING PLUGIN ' . $ext . ' ' . $base . ' pi' . $index . '
+plugin.' . $key . ' = USER
+plugin.' . $key . ' {
+    userFunc = ' . $ns . '\\Pi' . $index . '->main
+}');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($key, 'setup', '
+### ADDING PLUGIN ' . $ext . ' pi' . $index . '
+tt_content.list.20.' . $ext . '_pi' . $index . ' = < plugin.' . $key . '
+', 'defaultContentRendering');
+    }
+
+    public static function AddCtype($ext, $ns, $index)
+    {
+        $base = strtolower(str_replace('_', '', $ext));
+        $key = $base . '_pi' . $index;
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($key, 'setup', '
+### ADDING PLUGIN ' . $ext . ' ' . $base . ' pi' . $index . '
+plugin.tx_' . $key . ' = USER
+plugin.tx_' . $key . ' {
+    userFunc = ' . $ns . '\\Pi' . $index . '->main
+}
+tt_content.' . $key . ' = COA
+tt_content.' . $key . ' {
+    20 =< plugin.tx_' . $key . '
+}');
+    }
+
+    public static function AddCtypeTtcontent($ext, $i, $flex = false, $config = array())
+    {
+        $frontendLanguageFilePrefix = 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:';
+        $languageFilePrefix = 'LLL:EXT:' . $ext . '/Resources/Private/Language/locallang.xlf:';
+        $id = 'pi' . $i;
+        $extensionName = strtolower(str_replace('_', '', $ext));
+        $pluginSignature = $extensionName . '_pi' . $i;
+
+        $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['default'] = $pluginSignature;
+        $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$pluginSignature] = 'mimetypes-x-content-text';
+
+        $flexfield = $flex ? 'sudhaus7_flexform,' : '';
+        $addFields = isset($config['additionalFields']) ? $config['additionalFields'] : '';
+        $columnsOverrides = isset($config['columnsOverrides']) ? $config['columnsOverrides'] : [];
+
+        $GLOBALS['TCA']['tt_content']['types'][$pluginSignature] = [
+            'showitem' => '
+				--palette--;' . $frontendLanguageFilePrefix . 'palette.general;general,
+				--palette--;' . $frontendLanguageFilePrefix . 'palette.header;header,' . $flexfield . $addFields . '
+			--div--;' . $frontendLanguageFilePrefix . 'tabs.appearance,
+				layout;' . $frontendLanguageFilePrefix . 'layout_formlabel,tx_bfactorbkv4_colorscheme,tx_bfactorbkv4_screenwidth,
+				--palette--;' . $frontendLanguageFilePrefix . 'palette.appearanceLinks;appearanceLinks,
+			--div--;' . $frontendLanguageFilePrefix . 'tabs.access,
+				hidden;' . $frontendLanguageFilePrefix . 'field.default.hidden,
+				--palette--;' . $frontendLanguageFilePrefix . 'palette.access;access,
+			--div--;' . $frontendLanguageFilePrefix . 'tabs.extended
+		',
+            'columnsOverrides' => $columnsOverrides
+        ];
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
+            'tt_content',
+            'CType',
+            [
+                $languageFilePrefix . 'tt_content.' . $pluginSignature,
+                $pluginSignature,
+                'content-text'
+            ]
+        );
+
+        if ($flex) {
+            \SUDHAUS7\Sudhaus7Base\Tools\Plugins::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $ext . '/Configuration/Flexforms/' . ucfirst($id) . '.xml');
+        }
+
+
+    }
+
     /**
      * Adds an entry to the "ds" array of the tt_content field "sudhaus7_flexform".
      * This is used by plugins to add a flexform XML reference / content for use when they are selected as plugin or content element.
@@ -18,25 +96,6 @@ class Plugins {
         if (is_array($GLOBALS['TCA']['tt_content']['columns']) && is_array($GLOBALS['TCA']['tt_content']['columns']['sudhaus7_flexform']['config']['ds'])) {
             $GLOBALS['TCA']['tt_content']['columns']['sudhaus7_flexform']['config']['ds'][$piKeyToMatch] = $value;
         }
-    }
-
-
-    public static function AddList($ext,$ns,$index) {
-        $base = strtolower(str_replace('_','',$ext));
-        $key = 'tx_'.$base.'_pi'.$index;
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($key, 'setup', '
-### ADDING PLUGIN '.$ext.' '.$base.'
-plugin.'.$key.' = USER
-plugin.'.$key.' {
-    userFunc = '.$ns.'\\Pi'.$index.'->main
-}');
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($key, 'setup','
-### ADDING PLUGIN '.$ext.'
-tt_content.list.20.'.$ext.'_pi'.$index.' = < plugin.'.$key.'
-','defaultContentRendering');
-    }
-    public static function AddCtype($ext,$ns,$element,$flexform = false) {
-       
     }
     
     public static function AddListTtcontent($ext,$i,$flex=false,$wizard=false,$config = array()) {
