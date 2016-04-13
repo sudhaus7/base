@@ -10,3 +10,11 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys']['s7_developer'] =
     },
     '_CLI_lowlevel'
 );
+
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys']['s7_translatexml'] = array(
+    function () {
+        $cleanerObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\SUDHAUS7\Sudhaus7Base\Cli\Translatexml::class);
+        $cleanerObj->cli_main($_SERVER['argv']);
+    },
+    '_CLI_lowlevel'
+);
