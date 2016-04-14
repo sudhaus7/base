@@ -60,7 +60,8 @@ tt_content.' . $key . ' {
 			--div--;' . $frontendLanguageFilePrefix . 'tabs.access,
 				hidden;' . $frontendLanguageFilePrefix . 'field.default.hidden,
 				--palette--;' . $frontendLanguageFilePrefix . 'palette.access;access,
-			--div--;' . $frontendLanguageFilePrefix . 'tabs.extended
+			--div--;' . $frontendLanguageFilePrefix . 'tabs.extended,
+			--div--;LLL:EXT:gridelements/Resources/Private/Language/locallang_db.xlf:gridElements,tx_gridelements_container,tx_gridelements_columns
 		',
             'columnsOverrides' => $columnsOverrides
         ];
