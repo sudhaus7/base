@@ -12,7 +12,7 @@ class Plugins {
 plugin.' . $key . ' = USER
 plugin.' . $key . ' {
     userFunc = ' . $ns . '\\Pi' . $index . '->main
-}');
+}', 'defaultContentRendering');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($key, 'setup', '
 ### ADDING PLUGIN ' . $ext . ' pi' . $index . '
 tt_content.list.20.' . $ext . '_pi' . $index . ' = < plugin.' . $key . '
@@ -32,7 +32,7 @@ plugin.tx_' . $key . ' {
 tt_content.' . $key . ' = COA
 tt_content.' . $key . ' {
     20 =< plugin.tx_' . $key . '
-}');
+}', 'defaultContentRendering');
     }
 
     public static function AddCtypeTtcontent($ext, $i, $flex = false, $config = array())
