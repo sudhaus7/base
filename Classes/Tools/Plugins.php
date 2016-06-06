@@ -43,7 +43,7 @@ tt_content.' . $key . ' {
         $extensionName = strtolower(str_replace('_', '', $ext));
         $pluginSignature = $extensionName . '_pi' . $i;
 
-        $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['default'] = $pluginSignature;
+        #$GLOBALS['TCA']['tt_content']['columns']['CType']['config']['default'] = $pluginSignature;
         $GLOBALS['TCA']['tt_content']['ctrl']['typeicon_classes'][$pluginSignature] = 'mimetypes-x-content-text';
 
         $flexfield = $flex ? 'sudhaus7_flexform,' : '';
