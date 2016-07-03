@@ -18,3 +18,12 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys']['s7_translatexml'
     },
     '_CLI_lowlevel'
 );
+
+if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['sudhaus7fetchcontent_cache'])) {
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['sudhaus7fetchcontent_cache'] = array(
+        'backend' => 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend',
+        'frontend' => 'TYPO3\\CMS\\Core\\Cache\\Frontend\\VariableFrontend',
+        'groups' => array('pages'),
+        'options' => array('defaultLifetime' => 3600),
+    );
+}

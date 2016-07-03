@@ -34,7 +34,7 @@ class FetchcontentProcessor implements DataProcessorInterface
 
     public function __construct()
     {
-        $this->cache = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager')->getCache('bfactorfetchcontent_cache');
+        $this->cache = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager')->getCache('sudhaus7fetchcontent_cache');
     }
 
     /**
@@ -69,7 +69,7 @@ class FetchcontentProcessor implements DataProcessorInterface
                 if (substr($link, 0, 4) == 'http') {
 
 
-                    $cacheIdentifier = 'tx_bfactorfetchcontent-' . sha1($link);
+                    $cacheIdentifier = 'tx_sudhaus7fetchcontent-' . sha1($link);
                     $entry = '';
                     if (empty($entry)) {
 
