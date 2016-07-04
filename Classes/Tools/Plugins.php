@@ -98,8 +98,9 @@ tt_content.' . $key . ' {
             $GLOBALS['TCA']['tt_content']['columns']['sudhaus7_flexform']['config']['ds'][$piKeyToMatch] = $value;
         }
     }
-    
-    public static function AddListTtcontent($ext,$i,$flex=false,$wizard=false,$config = array()) {
+
+    public static function AddListTtcontent($ext, $i, $flex = false, $wizard = false, $config = array(), $iconext = 'png')
+    {
 
         global $TCA;
         $id = 'pi' . $i;
@@ -138,7 +139,7 @@ tt_content.' . $key . ' {
                         ' . $ext . '_' . $id . ' {
                             title = LLL:EXT:' . $ext . '/Resources/Private/Language/locallang.xlf:tt_content.' . $ext . '_' . $id . '
                             description = LLL:EXT:' . $ext . '/Resources/Private/Language/locallang.xlf:tt_content.' . $ext . '_' . $id . '.description
-                            icon = EXT:' . $ext . '/Resources/Public/Icons/' . ucfirst($id) . '.png
+                            icon = EXT:' . $ext . '/Resources/Public/Icons/' . ucfirst($id) . '.' . $iconext . '
                             tt_content_defValues {
                                 CType = list
                                 list_type = ' . $ext . '_' . $id . '
