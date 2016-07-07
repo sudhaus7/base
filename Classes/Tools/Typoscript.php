@@ -45,4 +45,20 @@ class Typoscript
         }
         return $c."\n";
     }
+
+    public static function cleanArray($a)
+    {
+        foreach ($a as $k => $v) {
+            if (substr($k, -1, 1) == '.') {
+                $k = substr($k, 0, -1);
+            }
+            if (is_array($v)) {
+                $a[$k] = self::cleanArray($v);
+            } else {
+                $a[$k] = $v;
+            }
+            unset($a[$k . '.']);
+        }
+        return $a;
+    }
 }
