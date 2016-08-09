@@ -267,27 +267,27 @@ class '.$class.' extends \\TYPO3\\CMS\\Extbase\\DomainObject\\AbstractEntity {
     /**
      * @var '.$type.'
      */
-    protected $'.$field.';
+    protected $'.GeneralUtility::underscoredToLowerCamelCase($field).';
 ';
         }
         $s .= '
     /**
      * '.GeneralUtility::underscoredToUpperCamelCase($field).'
      *
-     * @return '.$type.' '.$field.'
+     * @return '.$type.' '.GeneralUtility::underscoredToLowerCamelCase($field).'
      */
      public function get'.GeneralUtility::underscoredToUpperCamelCase($field).'() {
-        return $this->'.$field.';
+        return $this->'.GeneralUtility::underscoredToLowerCamelCase($field).';
      }
 
     /**
      * '.GeneralUtility::underscoredToUpperCamelCase($field).'
      *
-     * @param '.$type.' $'.$field.'
+     * @param '.$type.' $'.GeneralUtility::underscoredToLowerCamelCase($field).'
      * @return $this
      */
-     public function set'.GeneralUtility::underscoredToUpperCamelCase($field).'($'.$field.') {
-        $this->'.$field.' = $'.$field.';
+     public function set'.GeneralUtility::underscoredToUpperCamelCase($field).'($'.GeneralUtility::underscoredToLowerCamelCase($field).') {
+        $this->'.GeneralUtility::underscoredToLowerCamelCase($field).' = $'.GeneralUtility::underscoredToLowerCamelCase($field).';
         return $this;
      }
 ';
