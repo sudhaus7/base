@@ -12,10 +12,12 @@ namespace SUDHAUS7\Sudhaus7Base\Tools;
 class Timer
 {
     public static function start() {
-        $GLOBALS['SUDHAUS7BASE_TOOLS_TIMER'] = [];
+        if (!isset($GLOBALS['SUDHAUS7BASE_TOOLS_TIMER'])) $GLOBALS['SUDHAUS7BASE_TOOLS_TIMER'] = [];
         $GLOBALS['SUDHAUS7BASE_TOOLS_TIMER']['start'] = microtime(true);
     }
-
+    public static function end() {
+        self::ping('end');
+    }
     public static function ping($id) {
 
         $GLOBALS['SUDHAUS7BASE_TOOLS_TIMER'][$id] = microtime(true);
