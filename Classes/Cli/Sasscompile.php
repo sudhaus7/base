@@ -77,10 +77,10 @@ class Sasscompile extends \TYPO3\CMS\Core\Controller\CommandLineController
         if ($compiler->isValid()) {
             $compiler->toFile($this->cli_args['-target'][0]);
             $a = $compiler->getOutput();
-            foreach ($a as $l) $this->cli_echo($l);
+            foreach ($a as $l) $this->cli_echo($l."\n");
         } else {
             $a = $compiler->getOutput();
-            foreach ($a as $l) $this->cli_echo($l,true);
+            foreach ($a as $l) $this->cli_echo($l."\n",true);
         }
 
     }

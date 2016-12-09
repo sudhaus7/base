@@ -61,7 +61,7 @@ class Sass
         $tgt = uniqid('sudhaus7-base-sass-compile-',true).'.css';
         $cmd = $this->config['NODE'] . ' ' . $this->config['SASS'].' ';
         if ($this->minified) $cmd .=  ' --output-style compressed ';
-        $cmd .=  $this->src . ' ' . $tmpdir .'/'. $tgt . ' 2>&1';
+        $cmd .=  '"'.$this->src . '" "' . $tmpdir .'/'. $tgt . '" 2>&1';
         $ret = 0;
         $this->output[]='Executing Command '.$cmd;
         exec($cmd, $this->output, $ret);
