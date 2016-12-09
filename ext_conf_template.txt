@@ -1,4 +1,11 @@
 # cat=basic//01; type=string; label=Path to Phantomjs
 PHANTOMJS = /var/lib/phantomjs/current/bin/phantomjs
 
+# cat=basic//01; type=string; label=Path to node
+NODE = /usr/local/bin/node
 
+# cat=basic//02; type=string; label=Path to node-sass
+SASS = /usr/local/bin/node-sass
+
+# cat=basic//04; type=int; label=Max Filesize to inline into css in Byte
+MAXINLINE = 1500
