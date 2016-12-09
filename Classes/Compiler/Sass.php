@@ -62,7 +62,6 @@ class Sass
         $cmd = $this->config['NODE'] . ' ' . $this->config['SASS'].' ';
         if ($this->minified) $cmd .=  ' --output-style compressed ';
         $cmd .=  $this->src . ' ' . $tmpdir .'/'. $tgt . ' 2>&1';
-        echo "\n",$cmd,"\n";
         $ret = 0;
         $this->output[]='Executing Command '.$cmd;
         exec($cmd, $this->output, $ret);
