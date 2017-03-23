@@ -3,13 +3,14 @@ namespace SUDHAUS7\Sudhaus7Base\Tools;
 
 class Plugins {
 
-    public static function AddList($ext, $ns, $index)
+    public static function AddList($ext, $ns, $index, $nocache=false)
     {
+        $user = $nocache ? 'USER_INT' : 'USER';
         $base = strtolower(str_replace('_', '', $ext));
         $key = 'tx_' . $base . '_pi' . $index;
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($key, 'setup', '
 ### ADDING PLUGIN ' . $ext . ' ' . $base . ' pi' . $index . '
-plugin.' . $key . ' = USER
+plugin.' . $key . ' = '.$user.'
 plugin.' . $key . ' {
     userFunc = ' . $ns . '\\Pi' . $index . '->main
 }', 'defaultContentRendering');
@@ -19,13 +20,14 @@ tt_content.list.20.' . $ext . '_pi' . $index . ' = < plugin.' . $key . '
 ', 'defaultContentRendering');
     }
 
-    public static function AddCtype($ext, $ns, $index)
+    public static function AddCtype($ext, $ns, $index, $nocache=false)
     {
+        $user = $nocache ? 'USER_INT' : 'USER';
         $base = strtolower(str_replace('_', '', $ext));
         $key = $base . '_pi' . $index;
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($key, 'setup', '
 ### ADDING PLUGIN ' . $ext . ' ' . $base . ' pi' . $index . '
-plugin.tx_' . $key . ' = USER
+plugin.tx_' . $key . ' = '.$user.'
 plugin.tx_' . $key . ' {
     userFunc = ' . $ns . '\\Pi' . $index . '->main
 }
