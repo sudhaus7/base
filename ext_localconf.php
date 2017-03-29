@@ -30,7 +30,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys']['sasscompiler'] =
     },
     '_CLI_lowlevel'
 );
-if (isset($extConfig['INCLUDEMAILPOSTPROCESSOR']) && isset($extConfig['INCLUDEMAILPOSTPROCESSOR']) > 0) {
+if (isset($extConfig['INCLUDEMAILPOSTPROCESSOR']) && $extConfig['INCLUDEMAILPOSTPROCESSOR'] > 0) {
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Form\PostProcess\MailPostProcessor::class] = [
         'className' => SUDHAUS7\Sudhaus7Base\PostProcess\MailPostProcessor::class,
     ];
