@@ -1,6 +1,10 @@
 <?php
 
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
+$extConfig  = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7_base']);
+
+
+
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'Classes/Tools/Plugins.php');
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys']['s7_developer'] = array(
@@ -26,10 +30,11 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys']['sasscompiler'] =
     },
     '_CLI_lowlevel'
 );
-
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Form\PostProcess\MailPostProcessor::class] = [
-    'className' => SUDHAUS7\Sudhaus7Base\PostProcess\MailPostProcessor::class,
-];
+if (isset($extConfig['INCLUDEMAILPOSTPROCESSOR']) && isset($extConfig['INCLUDEMAILPOSTPROCESSOR']) > 0) {
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Form\PostProcess\MailPostProcessor::class] = [
+        'className' => SUDHAUS7\Sudhaus7Base\PostProcess\MailPostProcessor::class,
+    ];
+}
 
 if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['sudhaus7fetchcontent_cache'])) {
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['sudhaus7fetchcontent_cache'] = array(

@@ -9,3 +9,6 @@ SASS = /usr/local/bin/node-sass
 
 # cat=basic//04; type=int; label=Max Filesize to inline into css in Byte
 MAXINLINE = 1500
+
+# cat=Extended//01; type=int; label=Include CC Fix for Mailer (CC by field)
+INCLUDEMAILPOSTPROCESSOR = 1
