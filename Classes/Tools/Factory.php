@@ -31,10 +31,15 @@ class Factory
             $rowstorage = $GLOBALS['TYPO3_DB']->sql_fetch_row($resstorage);
             $ret['identifier'] = str_replace('//', '/', $rowstorage[0] . $rowfile['identifier']);
             $origRet = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'sys_file_metadata', 'file=' . $ret['uid_local']);
-            $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($origRet);
-            foreach ($row as $k => $v) {
-                if (isset($ret[$k]) && empty($ret[$k])) $ret[$k] = $v;
-                if (!isset($ret[$k])) $ret[$k] = $v;
+            if($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($origRet)) {
+	            foreach ($row as $k => $v) {
+	                if (isset($ret[$k]) && empty($ret[$k])) $ret[$k] = $v;
+	                if (!isset($ret[$k])) $ret[$k] = $v;
+	            }
+            } else {
+	            list($width, $height, $type, $attr) = \getimagesize( PATH_site  . $ret['identifier']);
+	            $ret['width']=$width;
+	            $ret['height']=$height;
             }
             $images[] = $ret;
         }
