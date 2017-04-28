@@ -36,28 +36,5 @@ if (isset($extConfig['INCLUDEMAILPOSTPROCESSOR']) && $extConfig['INCLUDEMAILPOST
     ];
 }
 
-
-$acachetables = ['sudhaus7fetchcontent_cache'];
-foreach ($acachetables as $cachetable) {
-	if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable])) {
-		$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]=[];
-	}
-	if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['groups'])) {
-		$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['groups']=[];
-	}
-	if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['options'])) {
-		$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['options']=[];
-	}
-	if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['backend'])) {
-		$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['backend'] = 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend';
-	}
-	if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['frontend'])) {
-		$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['frontend'] = 'TYPO3\\CMS\\Core\\Cache\\Frontend\\VariableFrontend';
-	}
-
-	if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['options']['defaultLifetime'])) {
-		$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['options']['defaultLifetime'] = 3600;
-	}
-	$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$cachetable]['groups'][] = 'pages';
-}
-
+$defaultConfig = include( \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath( $_EXTKEY ) . '/Configuration/DefaultConfiguration.php' );
+$GLOBALS['TYPO3_CONF_VARS'] = array_replace_recursive( $defaultConfig , $GLOBALS['TYPO3_CONF_VARS']);
