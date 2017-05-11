@@ -15,11 +15,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class FileSizeFilter {
-	private $maxsize = 0;
+	private $parameters = ['default'=>1024*1024*5];
 	public function filterInlineChildren(array $parameters, \TYPO3\CMS\Core\DataHandling\DataHandler $tceMain) {
 		$values = $parameters['values'];
-		$this->maxsize = (int)$parameters['max_size'];
-		if ($this->maxsize < 1) $this->maxsize = 1024*10;
+		//$this->parameters = (int)$parameters['max_size'];
+		$this->parameters = array_merge($this->parameters,$parameters);
 		$cleanValues = [];
 		$objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 		$flashMessageService = $objectManager->get(\TYPO3\CMS\Core\Messaging\FlashMessageService::class);
@@ -39,7 +39,7 @@ class FileSizeFilter {
 					// Remove the erroneously created reference record again
 					$tceMain->deleteAction('sys_file_reference', $fileReferenceUid);
 					$messageQueue->addMessage(\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
-						'Es sind nur Dateien mit einer maximalen Grösse von '.self::formatBytes( $this->maxsize).' erlaubt. Die Datei '.$file->getName().' ist aber '.self::formatBytes( $file->getSize()).' groß. Die Datei wurde wieder aus der Verwendungsliste entfernt.',
+						'Es sind nur Dateien mit einer maximalen Grösse von '.self::formatBytes( $this->getMaxSize($file)).' erlaubt. Die Datei '.$file->getName().' ist aber '.self::formatBytes( $file->getSize()).' groß. Die Datei wurde wieder aus der Verwendungsliste entfernt.',
 						'Datei '.$file->getName().' ist zu groß!', // the header is optional
 						\TYPO3\CMS\Core\Messaging\FlashMessage::WARNING, // the severity is optional as well and defaults to \TYPO3\CMS\Core\Messaging\FlashMessage::OK
 						TRUE // optional, whether the message should be stored in the session or only in the \TYPO3\CMS\Core\Messaging\FlashMessageQueue object (default is FALSE)
@@ -50,9 +50,12 @@ class FileSizeFilter {
 		return $cleanValues;
 	}
 	private function isAllowed(File $file) {
-
-		return $file->getSize() < $this->maxsize;
-
+		return $file->getSize() < $this->getMaxSize($file);
+	}
+	private function getMaxSize(File $file) {
+		$ext = $file->getExtension();
+		if (isset($this->parameters[$ext])) return $this->parameters[$ext];
+		return $this->parameters['default'];
 	}
 	static function formatBytes($size, $precision = 0)
 	{
