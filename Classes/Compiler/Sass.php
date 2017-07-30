@@ -16,7 +16,8 @@ class Sass
     private $config;
     private $output = [];
     private $parameter = '';
-    public $minified = false;
+	public $minified = false;
+	public $createmap = false;
     private $src;
     private $success = false;
     private $buffer = '';
@@ -61,6 +62,7 @@ class Sass
         $tgt = uniqid('sudhaus7-base-sass-compile-',true).'.css';
         $cmd = $this->config['NODE'] . ' ' . $this->config['SASS'].' ';
         if ($this->minified) $cmd .=  ' --output-style compressed ';
+        if ($this->createmap) $cmd .= '  --source-map-embed    ';
         $cmd .=  '"'.$this->src . '" "' . $tmpdir .'/'. $tgt . '" 2>&1';
         $ret = 0;
         $this->output[]='Executing Command '.$cmd;
