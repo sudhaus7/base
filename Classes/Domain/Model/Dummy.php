@@ -29,7 +29,7 @@ class Dummy
 		$var = self::from_camel_case(\substr($name,3));
 
 		if ($direction == 'set') {
-			$this->data[$var]=$arguments;
+			$this->data[$var]=is_array($arguments) ? array_shift($arguments) : $arguments;
 		}
 		if ($direction == 'get') {
 			if (isset($this->data[$var])) {
