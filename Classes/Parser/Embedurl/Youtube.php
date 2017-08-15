@@ -28,7 +28,7 @@ class Youtube {
 			{
 				$param = [];
 				parse_str($request['query'],$param);
-				$key = $param['watch'];
+				$key = $param['v'];
 			}
 			else
 			{
