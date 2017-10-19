@@ -5,11 +5,11 @@ CREATE TABLE tt_content (
 # TABLE STRUCTURE FOR TABLE 'cf_sudhaus7fetchcontent_cache'
 #
 CREATE TABLE cf_sudhaus7fetchcontent_cache (
-    id INT(11) unsigned NOT NULL AUTO_INCREMENT,
-    identifier VARCHAR(250) DEFAULT '' NOT NULL,
-    crdate INT(11) unsigned DEFAULT '0' NOT NULL,
+    id INT(11) unsigned NOT NULL auto_increment,
+    identifier VARCHAR(250)  NOT NULL DEFAULT '',
+    crdate INT(11) unsigned NOT NULL DEFAULT '0' ,
     content mediumblob,
-    lifetime INT(11) unsigned DEFAULT '0' NOT NULL,
+    lifetime INT(11) unsigned NOT NULL DEFAULT '0' ,
     PRIMARY KEY (id),
     KEY cache_id (identifier)
 ) ENGINE=InnoDB;
@@ -18,7 +18,7 @@ CREATE TABLE cf_sudhaus7fetchcontent_cache (
 # TABLE STRUCTURE FOR TABLE 'cf_sudhaus7fetchcontent_cache_tags'
 #
 CREATE TABLE cf_sudhaus7fetchcontent_cache_tags (
-    id INT(11) unsigned NOT NULL AUTO_INCREMENT,
+    id INT(11) unsigned NOT NULL auto_increment,
     identifier VARCHAR(250) DEFAULT '' NOT NULL,
     tag VARCHAR(250) DEFAULT '' NOT NULL,
     PRIMARY KEY (id),
