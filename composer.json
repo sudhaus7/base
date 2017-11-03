@@ -18,7 +18,7 @@
     "sudhaus7_base": "self.version"
   },
   "require": {
-    "typo3/cms-core": ">=6.2,<8.0"
+    "typo3/cms-core": ">=6.2,<8.9"
   },
   "extra": {
     "branch-alias": {
