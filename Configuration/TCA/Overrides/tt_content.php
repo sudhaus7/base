@@ -8,7 +8,25 @@ call_user_func(function () {
                 "type" => "flex",
                 "ds_pointerField" => "CType",
                 "ds" => [
-                    "default" => '',
+                    "default" => '
+                        <T3DataStructure>
+                          <ROOT>
+                            <type>array</type>
+                            <el>
+                                <!-- Repeat an element like "xmlTitle" beneath for as many elements you like. Remember to name them uniquely  -->
+                              <xmlTitle>
+                                <TCEforms>
+                                    <label>The Title:</label>
+                                    <config>
+                                        <type>input</type>
+                                        <size>48</size>
+                                    </config>
+                                </TCEforms>
+                              </xmlTitle>
+                            </el>
+                          </ROOT>
+                        </T3DataStructure>
+                    ',
                 ],
                 /*
                     $_EXTKEY.'_pi1'=>'FILE:EXT:bfactor_elements/pi1/flexform.xml',
