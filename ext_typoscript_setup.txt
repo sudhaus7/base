@@ -9,7 +9,6 @@ config.tx_extbase {
         }
     }
 }
-
 config.tx_sudhaus7base {
     persistence {
         classes {
