@@ -1,5 +1,7 @@
 <?php
 namespace SUDHAUS7\Sudhaus7Base\Tools;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class DB {
     /**
      * @return \TYPO3\CMS\Core\Database\DatabaseConnection
