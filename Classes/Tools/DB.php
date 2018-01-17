@@ -18,11 +18,11 @@ class DB {
 	 * $query = $this->createQuery();
 	 * \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(\SUDHAUS7\Sudhaus7Base\Tools\DB::getSqlFromQuery($query));
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param  $query
 	 *
 	 * @return array
 	 */
-	public static function getSqlFromQuery(\TYPO3\CMS\Extbase\Persistence\QueryInterface $query,$explainOutput = false) {
+	public static function getSqlFromQuery($query,$explainOutput = false) {
 
 		if (VersionNumberUtility::convertVersionNumberToInteger( TYPO3_version) < 8000000) {
 			$params = [];
