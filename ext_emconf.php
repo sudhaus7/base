@@ -22,8 +22,11 @@ $EM_CONF[$_EXTKEY] = array(
 	'author_company'                => 'Sudhaus 7',
 	'CGLcompliance'                 => '',
 	'CGLcompliance_note'            => '',
-	'version'                       => '1.0.13',
-	'constraints'                   => 'Array',
-	'_md5_values_when_last_written' => '',
-	'suggests'                      => 'Array',
+	'version'                       => '1.0.14',
+	'constraints'                   => [
+	    'depends' => [
+	        'typo3' => '6.2.0-8.7.99'
+        ]
+    ],
+	'suggests'                      => [],
 );
